@@ -191,9 +191,9 @@ Enter the plaintext.  (if: $hasKey)[[[Skip->Round X]]]
 
 (link: "Hint")[(print: _currentCipher's "hint")]
 
-
-<iframe src="https://gchq.github.io/CyberChef/" width="100%" height="150%"></iframe>
-
+<div style="height:800px;">
+	<iframe src="https://gchq.github.io/CyberChef/" width="100%" height="100%"></iframe>
+</div>
 
 
 :: fail {"position":"900,725","size":"100,100"}
