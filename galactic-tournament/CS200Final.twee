@@ -1,0 +1,383 @@
+:: StoryTitle
+CS200Final
+
+
+:: StoryData
+{
+  "ifid": "DB3704A5-E269-417C-A80A-C0CD2865F398",
+  "format": "Harlowe",
+  "format-version": "3.3.9",
+  "start": "Start",
+  "zoom": 1
+}
+
+
+:: ??? {"position":"900,975","size":"100,100"}
+You made it to the laser. As you look around you notice the control panel has a suspiciously (color:cyan)[Q-tip] shaped key slot.
+
+[[jam Q-tip in hole->secret win]]
+
+
+:: Goolesh {"position":"500,500","size":"100,100"}
+You approach the one known as Goolesh. It has the appearence of a jellyfish balloon animal hybrid.
+
+The creature speaks:
+
+<img style="background:white;"src="https://www.dcode.fr/tools/dancing-men/images/char(104).png" alt="char(104)"><img style="background:white;"src="https://www.dcode.fr/tools/dancing-men/images/char(101).png" alt="char(101)"><img style="background:white;"src="https://www.dcode.fr/tools/dancing-men/images/char(108).png" alt="char(108)"><img style="background:white;"src="https://www.dcode.fr/tools/dancing-men/images/char(108).png" alt="char(108)"><img style="background:white;"src="https://www.dcode.fr/tools/dancing-men/images/char(111).png" alt="char(111)">
+
+Oh dear... It's form of language seems quite advanced.
+
+
+[[Do a little jig->jig]]
+
+[[Run away->opponents]]
+
+
+:: Grugther {"position":"500,625","size":"100,100"}
+You approach the one known as Grugther, A giant orcish creature.
+
+(color:green)["Grugther solve puzzle good."]
+
+You admire his way with words.
+
+
+
+
+
+
+
+
+[[ask for a tip->tip]]
+
+[[insult]]
+
+[[Back->opponents]]
+
+
+:: Round X {"position":"900,575","size":"100,100"}
+{
+(if: $round is 11)[
+	(go-to:"win")
+]
+
+(set: _cipherHidden to false)
+(set: _triviaHidden to false)
+(if: $cipher's length is 0)[
+	(set: _cipherHidden to true)
+]
+(if: $trivia's length is 0)[
+	(set: _triviaHidden to true)
+]
+}
+<b>Round $round</b>
+
+Solve a cipher for 3 points or answer a trivia question for 1.
+
+(if:_cipherHidden is false)[[[Solve Cipher->cipher]]] 
+(if: _triviaHidden is false)[[[Answer Trivia->trivia]]]
+
+[[Shop]]
+
+[[Speak to opponents->opponents]]
+
+
+:: Shop {"position":"1075,500","size":"100,100"}
+You have (color:yellow)[$score] points.
+
+(if: $score >= 6)[
+	(link: "Buy more time for trivia (6pts)")[
+    	(set: $score to it - 6)
+    	(set: $timeUpgraded to true)
+    	(goto: "Shop")
+        ]
+](else:)[Buy more time for trivia (6pts)(click-replace:"Buy more time for trivia (6pts)")[<i>Not enough points.</i>]]
+
+(if: $score >= 7)[
+	(link: "Buy a skip (7pts)")[
+    	(set: $score to it - 7)
+    	(set: $hasSkip to true)
+    	(goto: "Shop")
+    ]
+](else:)[Buy a skip (7pts)(click-replace: "Buy a skip (7pts)")[<i>Not enough points.</i>]]
+
+(if: $score >= 24)[
+	(link: "Buy a fancy key (24pts)")[
+    	(set: $score to it - 24)
+    	(set: $hasKey to true)
+    	(goto: "Shop")
+    ]
+](else:)[Buy a fancy key (24pts)(click-replace:"Buy a fancy key (24pts)")[<i>Not enough points.</i>]]
+
+
+
+[[Back->Round X]]
+
+
+:: Start {"position":"900,450","size":"100,100"}
+You have been selected to compete in the Galactic Tournament of Cryptography. You will be competing against opponents in a series of challenges to determine the fate of the Earth. Fail and we're all cooked.
+
+[[Round 1->Round X]]
+
+(set: $round to 1)
+(set: $score to 0)
+(set: $timeUpgraded to false)
+(set: $hasSkip to false)
+(set: $hasKey to false)
+(set: $hasBlanket to false)
+(set: $hasOnion to false)
+(set: $hasQtip to false)
+
+
+
+(set: $cipher to (a: (dm: "ciphertext","qvabfnerpbby", "answer","dinosarecool","hint","a common shift cipher."),
+(dm: "ciphertext",".... . .-.. .-.. --- .-- --- .-. .-.. -..", "answer","HELLOWORLD","hint","a common shift cipher."),
+(dm: "ciphertext","B`qqlkbvmlcq|", "answer","Gettingshifty","hint","A bitwise operation using a key of 5"),
+(dm: "ciphertext","01011 01011 01011 00001 00000 00010 01101 01100", "answer","MMMBACON","hint","breakfast cipher?"),
+(dm: "ciphertext","00110100 00110010", "answer","42","hint","Some say it is the answer to life, the universe, and everything."),
+(dm: "ciphertext","ZW5jb2RpbmcgaXMgbm90IGVuY3J5cHRpb24=", "answer","encoding is not encryption","hint","This increases size of plaintext by 33%"),
+(dm: "ciphertext","69 70 76 36 73 75 78", "answer","ipv6sux","hint","16..."),
+(dm: "ciphertext","VOJLU NOYHN BA", "answer","RIDDL EMETH IS","hint","WW2 cipher, default settings"),
+(dm: "ciphertext","71 62 68 6f 79 72 67 65 62 68 6f 79 72", "answer","doubletrouble","hint","transformed twice"),
+(dm: "ciphertext","147 162 145 141 164 152 157 142 41", "answer","greatjob!","hint","8...")
+))
+
+
+
+
+
+
+(set: $trivia to (a: (dm: "question", "In asymmetric encryption, which key is used for signing?", "correct", "Private Key", "incorrect", "Public Key"),
+(dm: "question", "True or False, the Advanced Encryption Standard (AES) is an algorithm used for symmetric encryption", "correct", "True", "incorrect", "False"),
+(dm: "question", "True or False, Frequency Analysis is the art of utilizing radio frequencies to crack encrypted messages.", "correct", "False", "incorrect", "True"),
+(dm: "question", "What is the difference between hashing and encryption?", "correct", "Hashing can't be reveresed.", "incorrect", "Encryption is used to verify the integrity of a downloaded file."),
+(dm: "question", "RSA's security relies heavily on what?", "correct", "The size of the prime numbers used.", "incorrect", "Finding the intersection points of a non-singular elliptic curve over a finite field."),
+(dm: "question", "How does steganography differ from traditional cryptography?", "correct", "Steganography typically hides the message in plain sight.", "incorrect", "Steganography uses asymmetric public keys."),
+(dm: "question", "How does a classic Caesar cipher encrypt a plain text message?", "correct", "It shifts every letter of the alphabet forward or backward by a fixed number of positions.", "incorrect", "It swaps out letters based on a repeating secret password."),
+(dm: "question", "What is a common use of hashes?", "correct", "Securely storing passwords.", "incorrect", "Sending data securely over the internet."),
+(dm: "question", "True or False, Symmetric encryption uses 1 key to encrypt and decrypt.", "correct", "True", "incorrect", "False"),
+(dm: "question", "True or False, Encryption is only used by nerds.", "correct", "False", "incorrect", "True")
+))
+
+
+
+
+:: cipher {"position":"725,700","size":"100,100"}
+{(set: _randomCipherIndex to (random: 1,$cipher's length))
+(set: _currentCipher to ($cipher's (_randomCipherIndex)))
+(set: _ciphertext to _currentCipher's "ciphertext")
+(set: _answer to _currentCipher's "answer")}
+\
+The ciphertext has been revealed: (color: red)[_ciphertext]
+\
+You only have one shot at this. The galatic community isn't very forgiving.
+
+Enter the plaintext.  (if: $hasKey)[[[Skip->Round X]]]
+
+(input: bind _plaintext)     
+(link: "Submit")[
+
+  (if: _plaintext is not _answer)[
+  	(if: not $hasOnion or not $hasQtip or not $hasBlanket)[
+      	(go-to:"fail")
+      ](else:)[(go-to:"last chance")]
+  ]
+  (else:)[
+  	(set: $score to it + 3)
+    (set: $round to it+1)
+  	(set: $cipher to it - (a: _currentCipher))
+      (go-to:"Round X")
+  ]
+]
+
+(link: "Hint")[(print: _currentCipher's "hint")]
+
+
+<iframe src="https://gchq.github.io/CyberChef/" width="100%" height="150%"></iframe>
+
+
+
+:: fail {"position":"900,725","size":"100,100"}
+You failed and Earth has blown up... 
+
+At least you don't have to worry about taxes any more.
+
+[[Restart->Start]] 
+
+
+:: insult {"position":"350,700","size":"100,100"}
+You tell Grugther his mother smells of elderberries and his father was a hamster.
+
+It's a good thing he doesn't know what either of those are.  He laughs at your funny words and gives you a (color:cyan)[half eaten onion].
+
+
+
+
+[[Back->Grugther]]
+
+(set: $hasOnion to True)
+
+
+:: jig {"position":"350,450","size":"100,100"}
+You attempt a few Fortnite dances you've seen to appease Goolesh. It makes a bubbly laughing sound and you get the idea you've just embarresed yourself. Whether out of gratitude or pity it hands you a (color:cyan)[wet blanket].
+
+[[Back->opponents]]
+
+
+(set: $hasBlanket to true)
+
+
+:: last chance {"position":"725,825","size":"100,100"}
+You failed... The guards begin to drag you away as the death laser powers up. Just when you think all hope is lost, you catch a whiff of something from your pocket.
+
+It's the half eaten onion! You offer the onion to the guards in exchange for your freedom. They accept.
+
+Quick! Get to the laser before Earth is destroyed!
+
+
+[[Hurry!->transition]]
+
+
+:: opponents {"position":"725,500","size":"100,100"}
+You step into the waiting area and see 10 aliens scattered around. Only two seem to be in a talkative mood.
+
+[[Grugther]]
+
+[[Goolesh]]
+
+
+[[Back->Round X]]
+
+
+:: secret win {"position":"900,1100","size":"100,100"}
+You had wrapped the (color:cyan)[Q-tip] in the (color:cyan)[Wet Blanket] and it is now soggy. You jam the soggy Q-tip into the slot and sparks begin flying across the control panel.
+
+You hear the laser powering down. You have spared Earth and all the other contestants' planets from destruction.
+
+(color:yellow)[YOU WIN]
+
+[[Restart->Start]] 
+
+
+:: tip {"position":"350,575","size":"100,100"}
+You ask Grugther if he has any tips for the challenge. He looks at you for a moment before hurrying away. When he returns he is holding something in his hand.
+
+It is a (color:cyan)[Q-tip].
+
+(color:green)["Grugther have many tips. Take one."]
+
+[[Back->Grugther]]
+
+
+(set:$hasQtip to True)
+
+
+:: transition {"position":"725,950","size":"100,100"}
+<div class=background>
+    <img class=player src="images/harris.png"></img>
+</div>
+
+(set: _countdown to 6)
+{(live: 1s)[
+	(set: _countdown to it - 1)
+    (if: _countdown is 0)[
+    	(go-to: "???")
+    ]
+]
+
+
+:: trivia {"position":"1075,700","size":"100,100"}
+(set: _randomTriviaIndex to (random: 1,$trivia's length))
+(set: _currentTrivia to $trivia's (_randomTriviaIndex))
+(set: _countdown to 15)(if:$timeUpgraded)[(set:_countdown to 20)]
+(print: _currentTrivia's "question")
+
+Quick! Answer before your opponent does!
+{(live: 1s)[
+	(color:red)[_countdown]
+	(set: _countdown to it - 1)
+    (if: _countdown is 0)[
+    	(go-to: "fail")
+    ]
+]
+}
+
+(set: _correct to _currentTrivia's "correct")
+(set: _incorrect to _currentTrivia's "incorrect")
+(set: _answer to (shuffled: _correct, _incorrect))
+{
+(link: _answer's  1st)[
+	(if: _answer's 1st is _correct)[
+    	(set: $score to it + 1)
+        (set: $round to it+1)
+    	(go-to: "Round X"))
+    ]
+    (go-to: "fail")
+]
+<br>
+<br>
+(link: _answer's  2nd)[
+	(if: _answer's 2nd is _correct)[
+    	(set: $score to it + 1)
+        (set: $round to it+1)
+    	(go-to: "Round X"))
+    ]
+    (go-to: "fail")
+]
+}
+
+(set: $trivia to it - (a: _currentTrivia))
+
+
+:: win {"position":"900,850","size":"100,100"}
+You have completed all the challenges and proven Earth's cryptographic superiority. The planet has been spared from annihilation. Unfortuantely your opponent's planets were not so lucky.
+
+
+
+(color:yellow)[YOU WIN]
+
+
+[[Restart->Start]]
+
+
+:: StoryStylesheet [stylesheet]
+tw-link.visited {
+  color: #4169E1; 
+}
+tw-link.visited:hover {
+  color: #00bfff; 
+}
+
+@keyframes upAndDown {
+  0% {top: 75vh;}
+  50% {top: 73vh;}
+  100% {top: 75vh;}
+}
+
+.player {
+  height: 15vh;
+  width: 15vh;
+  top: 75vh;
+  left: 50vw;
+  animation: upAndDown 1s linear infinite;
+}
+
+
+
+
+@keyframes scroll {
+	0%{background-position: 0px 0px;
+  }
+  100% {
+    background-position: -100vw 0px;
+  }
+}
+  
+.background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw; 
+  background-image: url("images/corridor.png");
+  animation: scroll 5s linear infinite;   
+}
